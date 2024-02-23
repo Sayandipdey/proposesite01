@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I LOVE YOU</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: black; /* Set default background color to black */
+            background-size: cover; /* Cover the entire background */
+            background-position: center; /* Position the background image at the center */
+            background-repeat: no-repeat; /* Do not repeat the background image */
+            height: 100vh; /* Set height to viewport height */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: changeBackground 18s infinite; /* 6s for each image, repeated infinitely */
+        }
+
+        @keyframes changeBackground {
+            0%, 17.9% {
+                background-image: url('./YourName01.gif');
+            }
+            33.3%, 51.2% {
+                background-image: url('./YourName02.gif');
+            }
+            66.6%, 84.5% {
+                background-image: url('./YourName03.gif');
+            }
+        }
+
+        /* Additional CSS styles for content can be added here */
+        .content {
+            display: flex;
+            text-align: center;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+
+        .love {
+            font-size: 100px; /* Increase font size */
+            font-weight: bold;
+            display: block; /* Ensure it takes up the entire width */
+            margin-bottom: 20px; /* Add spacing */
+        }
+
+        /* Example of styling for text */
+        h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 90px;
+        }
+    </style>
+</head>
+<body>
+    <video autoplay muted loop id="background-video">
+        <source src="./YourName.gif" type="image/gif">
+    </video>
+
+    <div class="content">
+        <!-- Your content here -->
+        <p>I <span class="love">LOVE</span> YOU</p>
+        <button class="accept-btn" id="acceptBtn">Accept</button>
+        <button class="reject-btn" id="rejectBtn">Reject</button>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            const rejectBtn = document.getElementById('rejectBtn');
+            const acceptBtn = document.getElementById('acceptBtn');
+            let isMovingTowards = false;
+            let lastX = 0;
+            let lastY = 0;
+            let moveCount = 0;
+
+            document.addEventListener('mousemove', function(event) {
+                const mouseX = event.clientX;
+                const mouseY = event.clientY;
+
+                const rejectBtnRect = rejectBtn.getBoundingClientRect();
+                const rejectBtnX = rejectBtnRect.left + rejectBtnRect.width / 2;
+                const rejectBtnY = rejectBtnRect.top + rejectBtnRect.height / 2;
+
+                const distance = Math.sqrt(Math.pow(mouseX - rejectBtnX, 2) + Math.pow(mouseY - rejectBtnY, 2));
+
+                if (distance < 100) {
+                    const angle = Math.atan2(mouseY - rejectBtnY, mouseX - rejectBtnX);
+                    const newX = rejectBtnX - 100 * Math.cos(angle); 
+                    const newY = rejectBtnY - 100 * Math.sin(angle); 
+                    rejectBtn.style.transition = 'transform 0.1s';
+                    rejectBtn.style.transform = `translate(${newX - rejectBtnX}px, ${newY - rejectBtnY}px)`;
+                    isMovingTowards = true;
+                    moveCount++;
+                    if (moveCount >= 20) {
+                        moveCount = 0;
+                        const randomX = Math.random() > 0.5 ? 2000 : -2000;
+                        const randomY = Math.random() > 0.5 ? 2000 : -2000;
+                        rejectBtn.style.transition = 'transform 1s';
+                        rejectBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
+                    }
+                } else {
+                    isMovingTowards = false;
+                    lastX = mouseX;
+                    lastY = mouseY;
+                }
+            });
+
+            rejectBtn.addEventListener('mouseleave', function() {
+                if (isMovingTowards) {
+                    rejectBtn.style.transition = 'transform 0.1s';
+                    rejectBtn.style.transform = 'none';
+                }
+            });
+
+            rejectBtn.addEventListener('click', function() {
+                // Add disappearing effect
+                rejectBtn.style.transition = 'opacity 1s';
+                rejectBtn.style.opacity = '0';
+                setTimeout(function() {
+                    rejectBtn.style.display = 'none';
+                }, 1000); // Wait for transition to complete before hiding
+            });
+
+            acceptBtn.addEventListener('click', function() {
+                window.location.href = 'index1.html';
+            });
+        });
+    </script>
+</body>
+</html>

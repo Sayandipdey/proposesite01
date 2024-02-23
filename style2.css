@@ -1,0 +1,56 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden; /* Prevent scrolling */
+}
+
+#background-video {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -1; /* Ensure the video stays behind other content */
+}
+
+
+.centered-text {
+    text-align: top;
+    margin-top: 15px;
+}
+
+
+.centered-text h1 {
+    font-weight: bold;
+    color: white;
+    font-size: 8vw; /* Adjust font size as needed */
+    text-align: top;
+}
+.centered-text h2 {
+    font-weight: bold;
+    color: rgb(255, 129, 129);
+    font-size: 5vw; /* Adjust font size as needed */
+    text-align: top;
+}
+.perks-included {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    margin-top: 10px;
+}
+
+.perks-included div {
+    font-size: 20px;
+    color: white;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+
+

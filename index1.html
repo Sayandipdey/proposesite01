@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOVE U TOO</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: changeBackground 56s infinite; /* 7s for each image, repeated infinitely for 8 images */
+        }
+
+        @keyframes changeBackground {
+            0%, 12.5% {
+                background-image: url('./weathering01.gif');
+            }
+            14.2%, 25% {
+                background-image: url('./weathering02.gif');
+            }
+            28.5%, 37.5% {
+                background-image: url('./weathering03.gif');
+            }
+            42.8%, 50% {
+                background-image: url('./weathering04.gif');
+            }
+            57.1%, 62.5% {
+                background-image: url('./weathering05.gif');
+            }
+            71.4%, 75% {
+                background-image: url('./weathering06.gif');
+            }
+            85.7%, 87.5% {
+                background-image: url('./weathering07.gif');
+            }
+            100% {
+                background-image: url('./weathering08.gif');
+            }
+        }
+        /* Style for the button */
+        .button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 15px 30px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px; /* Adjusted font size */
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: #45a049;
+        }
+
+        /* Style for the centered text */
+        .centered-text {
+            text-align: center;
+            color: white;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+
+        .centered-text h1 {
+            font-size: 36px; /* Adjusted font size */
+            margin-bottom: 10px;
+        }
+
+        .centered-text h2 {
+            font-size: 18px; /* Adjusted font size */
+            margin-bottom: 20px;
+        }
+
+        /* Style for the perks */
+        .perks-included {
+            text-align: center;
+            color: white;
+            display: none;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+
+        .perks-included div {
+            font-size: 14px; /* Adjusted font size */
+            margin-top: 10px;
+        }
+
+        /* Other CSS styles remain unchanged */
+
+        /* Style for video */
+        #background-video {
+            display: none; /* Hide the video element */
+        }
+    </style>
+</head>
+<body>
+    <!-- Video background -->
+    <video autoplay muted loop id="background-video">
+        <source src="./weathering.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <!-- Text content and perks -->
+    <div class="centered-text">
+        <h1>CONGRATULATIONS!</h1>
+        <h2>You have successfully enrolled for lifetime premium plus access to mine.</h2>
+        <button class="button" id="perksButton">PERKS INCLUDED:</button>
+    </div>
+
+    <div class="perks-included">
+        <div class="01">24x7 Support for your every ups and downs</div>
+        <div class="02">If you want you can replace my Kolbalish with yourself</div>
+        <div class="03">Lifetime access to Premium Moral and emotional support.</div>
+        <div class="04">Lifetime shoulder support to lean on.</div>
+        <div class="05">Unlimited hugs and Kisses.</div>
+        <div class="06">Included with lots of love.</div>
+        <div class="07">Constant encouragement in your endeavors as an ideal partner.</div>
+        <div class="08">Always ready to lend an ear to listen to your problems.</div>
+        <!-- Remaining perks -->
+    </div>
+
+    <!-- Audio for the music -->
+    <audio id="background-music" preload="auto" volume="0.5">
+        <source src="./kaise.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- JavaScript -->
+    <script>
+        const perksButton = document.getElementById('perksButton');
+        const centeredText = document.querySelector('.centered-text');
+        const perksIncluded = document.querySelector('.perks-included');
+        const backgroundMusic = document.getElementById('background-music');
+
+        document.addEventListener('DOMContentLoaded', function() {
+            backgroundMusic.play();
+        });
+
+        perksButton.addEventListener('click', () => {
+            centeredText.style.display = 'none'; // Hide centered text
+            perksIncluded.style.display = 'block'; // Show the perks when the button is clicked
+
+            setTimeout(function() {
+                centeredText.style.display = 'block';
+                perksIncluded.style.display = 'none';
+            }, 25000);
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const perks = document.querySelectorAll('.perks-included div');
+            const perksContainer = document.querySelector('.perks-included');
+            let index = 0;
+
+            function showNextPerk() {
+                if (index < perks.length) {
+                    perks[index].classList.add('active'); // Show the perk
+                    index++;
+                } else {
+                    index = 0; // Reset index to repeat the cycle
+                }
+            }
+
+            perksButton.addEventListener('click', function() {
+                perks.forEach(perk => {
+                    perk.classList.toggle('active');
+                });
+                showNextPerk();
+
+                setTimeout(function() {
+                    perksContainer.style.display = 'none';
+                    perks.forEach(perk => {
+                        perk.classList.remove('active');
+                    });
+                }, 25000);
+            });
+
+            perksContainer.style.display = 'none';
+        });
+    </script>
+</body>
+</html>
